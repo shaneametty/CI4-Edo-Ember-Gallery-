@@ -1,78 +1,82 @@
-<a name="readme-top"></a>
-
-<br/>
-<br/>
-
 <div align="center">
-  <a href="https://github.com/zyx-0314/">
-    <img src="./assets/img/nyebe_white.png" alt="Nyebe" width="130" height="100">
-  </a>
-<!-- * Title Section -->
-  <h3 align="center">AD - CI4 Template</h3>
+
+<img src="https://i.pinimg.com/originals/8c/42/43/8c4243960da81dba835adc6bbbcfda27.gif" alt="Litten Group" width="130" height="100">
+
+<h1>Edo Ember Gallery</h1>
+
+<p><strong>Bringing classic brushwork to the digital age.</strong></p>
+
+<p>A web-based art and design studio platform that showcases both traditional and modern artworks, multimedia installations, and creative collaborations.<br>
+This project demonstrates CRUD-based gallery and commission management, built for artists, clients, and curators.</p>
+
 </div>
 
-<!-- * Description Section -->
-<div align="center">
-This repository is a beginner-friendly CodeIgniter 4 template.  
-It helps teams quickly bootstrap backend + frontend projects, with simple sample modules that show how to extend the system.
-</div>
+**Group:** Litten  
 
-<br/>
+**Team Leader:** Tampipig, Shane
 
-![](https://visit-counter.vercel.app/counter.png?page=zyx-0314/ci4-template)
-
-<!-- ! Make sure it was similar to your github -->
+**Members:**  
+- Bundalian, Romeo Andree  
+- Gonzales, Orven  
+- Japon, Althaea  
+- Sapallo, Cyrus  
 
 ---
 
-<br/>
-<br/>
-
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#overview">Overview</a>
-      <ol>
-        <li>
-          <a href="#key-components">Key Components</a>
-        </li>
-        <li>
-          <a href="#technology">Technology</a>
-        </li>
-      </ol>
-    </li>
-    <li>
-      <a href="#rules-practices-and-principles">Rules, Practices and Principles</a>
-    </li>
-    <li>
-      <a href="#resources">Resources</a>
-    </li>
-  </ol>
-</details>
+## Table of Contents
+- [Overview](#overview)
+- [Project Features](#project-features)
+- [Key Components](#key-components)
+- [Products & Services](#products--services)
+- [Technology](#technology)
+- [About](#about)
 
 ---
 
-## Overview
+## Overview  
+**Edo Ember Gallery** is an art and design studio that bridges tradition and innovation—a creative hub where classic artistry meets modern digital expression.  
+The platform showcases **traditional and modern artworks, installations, and multimedia pieces**, and provides artists and clients with a space to collaborate, commission, and share their work.
 
-This template provides a **minimal CodeIgniter 4 project layout** with conventions for file organization, commit practices, and simple modules.
+**Purpose:**  
+To provide a collaborative, interactive digital space where artists can showcase, sell, and commission artworks while maintaining creative authenticity.  
 
-It is designed to be **easy to start with** and a **reference for adding new features**.
+**Audience:**  
+Artists, collectors, and art enthusiasts looking to explore and support modern and traditional art in one cohesive online environment.
 
-* **Purpose**: a clean starting point for CI4 apps.
-* **Audience**: developers who want a predictable structure and quick onboarding.
+---
 
-### Key Components
+## Project Features
+| Feature | Description |
+|---------|-------------|
+| **User Management (Admin)** | Admins can create, update, and manage user profiles, including artists and clients. |
+| **Product Management** | Admins can manage artworks, prints, merchandise, and other gallery products. |
+| **Order Management** | Customers can place and track orders; admins can manage and update order statuses. |
 
-These are **sample modules** included (or suggested) for learning how to add features:
+---
 
-| Component                 | Purpose                                                             | Notes                                                   |
-| ------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------- |
-| **Auth (Sample)**         | Basic login/logout and role check (admin/user).                     | Uses CI4 sessions + MySQL `users` table.                |
-| **CRUD Module**           | Example entity (`Posts` or `Tasks`) with create/read/update/delete. | Demonstrates Controller → Service → Repository pattern. |
-| **Scheduler (Sample)**    | Simple to-do list with due dates.                                   | Shows how to extend with new tables and services.       |
+## Key Components
+| Component | Purpose | Notes |
+|-----------|---------|-------|
+| Profile Management | Handles admin, artist, and client registration, profile creation, and updates. | Demonstrates CRUD operations and relational linking. |
+| Artworks & Exhibits | Displays featured artworks, collections, and multimedia exhibits. | Integrates image uploads, metadata, and curation. |
+| Products & Services | Lists purchasable art prints, merchandise, and service offerings. | Demonstrates e-commerce-style CRUD logic. |
+| Admin Dashboard | Enables admins to manage users, artworks, and orders. | Controls backend data and system configurations. |
 
- <!-- ! Start simple. Use these modules as **learning samples**; extend or replace them based on your project’s needs. -->
+---
+
+## Products & Services  
+
+### **Services**  
+- 🖼️ **Custom Artwork Commissions** – Request personalized art pieces made by professional artists.  
+- 🌐 **Virtual Gallery Events** – Experience curated art exhibits and events in an immersive online space.  
+- 🤝 **Artist Collaboration Packages** – Connect with other creatives and collaborate on special projects.  
+
+### **Products**  
+- 📚 **Art Prints & Books** – High-quality prints and art publications.  
+- 🖌️ **Original Artworks** – One-of-a-kind pieces from talented artists.  
+- 🎁 **Art-Inspired Merchandise** – Collectibles, clothing, and accessories inspired by featured works.  
+
+---
 
 ### Technology
 
@@ -87,15 +91,6 @@ These are **sample modules** included (or suggested) for learning how to add fea
 
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge\&logo=tailwindcss\&logoColor=white)
 ![CodeIgniter](https://img.shields.io/badge/CodeIgniter-EF4223?style=for-the-badge\&logo=codeigniter\&logoColor=white)
-
-#### Databases
-
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge\&logo=mysql\&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge\&logo=postgresql\&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge\&logo=mongodb\&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge\&logo=firebase\&logoColor=black)
-
-<!-- ! Keep only the used technology -->
 
 ---
 
@@ -225,4 +220,7 @@ AD-ProjectName/
 | Google Photos (Assets)  | Stock imagery and graphics used in UI mockups and documentation.      | [https://photos.google.com](https://photos.google.com)                     |
 | System Documentation    | Internal docs from PHP, MongoDB, and PostgreSQL used in development.  | — (see `/docs` folder in repo)                                             |
 
-<!-- ! Add what tools aided you -->
+
+---
+
+**© 2025 Edo Ember Gallery – All Rights Reserved**
