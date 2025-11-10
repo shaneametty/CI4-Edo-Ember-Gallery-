@@ -1,4 +1,4 @@
-name: ad-ci4
+name: edo-ci4
 
 services:
   php:
