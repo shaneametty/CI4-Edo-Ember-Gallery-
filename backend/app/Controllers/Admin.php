@@ -25,4 +25,19 @@ class Admin extends BaseController
     {
         return view('admin/users_update');
     }
+
+    public function products(): string
+    {
+        return view('admin/products');
+    }
+
+    public function products_update(): string
+    {
+        return view('admin/products_update');
+    }
+
+    public function products_create(): string
+    {
+        return view('admin/products_create');
+    }
 }
