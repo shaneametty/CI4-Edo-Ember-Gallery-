@@ -16,3 +16,7 @@ $routes->get('/roadMap', 'Users::roadMap');
 $routes->get('/moodBoard', 'Users::moodBoard');
 
 $routes->get('/dashboard', 'Admin::dashboard');
+
+$routes->get('/users', 'Admin::users');
+$routes->get('/users_create', 'Admin::users_create');
+$routes->get('/users_update', 'Admin::users_update');
