@@ -24,3 +24,7 @@ $routes->get('/users_update', 'Admin::users_update');
 $routes->get('/products', 'Admin::products');
 $routes->get('/products_update', 'Admin::products_update');
 $routes->get('/products_create', 'Admin::products_create');
+
+$routes->get('/orders', 'Admin::orders');
+$routes->get('/orders_create', 'Admin::orders_create');
+$routes->get('/orders_update', 'Admin::orders_update');
