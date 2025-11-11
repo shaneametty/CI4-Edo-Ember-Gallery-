@@ -18,6 +18,19 @@ $routes->get('/moodBoard', 'Users::moodBoard');
 $routes->get('/dashboard', 'Admin::dashboard');
 
 // ============================================
+// Authentication Routes
+// ============================================
+
+// Show login page
+$routes->get('login', 'Auth::showLoginPage');
+
+// Process login
+$routes->post('login', 'Auth::login');
+
+// Logout
+$routes->get('logout', 'Auth::logout');
+
+// ============================================
 // User Management Routes (CRUD Testing)
 // Protected - Admin Only
 // ============================================
