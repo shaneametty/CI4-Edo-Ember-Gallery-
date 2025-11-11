@@ -23,7 +23,7 @@ class Auth extends BaseController
         // If already logged in, redirect based on user type
         if (session()->get('isLoggedIn')) {
             if (session()->get('userType') === 'admin') {
-                return redirect()->to('/test/users');
+                return redirect()->to('/admin/users');
             } else {
                 return redirect()->to('/'); // Redirect regular users to home
             }
@@ -89,11 +89,10 @@ class Auth extends BaseController
 
             // Redirect based on user type
             if ($user->type === 'admin') {
-                return redirect()->to('/test/users');
+                return redirect()->to('/admin/users');
             } else {
                 return redirect()->to('/'); // Regular users go to home
             }
-
         } catch (\Throwable $e) {
             $session->setFlashdata('error', 'Server error: ' . $e->getMessage());
             return redirect()->back()->withInput();
