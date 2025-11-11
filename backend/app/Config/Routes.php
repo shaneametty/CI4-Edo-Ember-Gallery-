@@ -20,3 +20,7 @@ $routes->get('/dashboard', 'Admin::dashboard');
 $routes->get('/users', 'Admin::users');
 $routes->get('/users_create', 'Admin::users_create');
 $routes->get('/users_update', 'Admin::users_update');
+
+$routes->get('/products', 'Admin::products');
+$routes->get('/products_update', 'Admin::products_update');
+$routes->get('/products_create', 'Admin::products_create');
