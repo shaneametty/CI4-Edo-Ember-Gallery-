@@ -4,18 +4,15 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UsersModel;
-use App\Models\ProductsModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class CRUDUsers extends BaseController
 {
     protected $userModel;
-    protected $productModel;
 
     public function __construct()
     {
         $this->userModel = new UsersModel();
-        $this->productModel = new ProductsModel();
     }
 
     // ============================================
