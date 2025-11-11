@@ -31,11 +31,11 @@ class CRUDUsers extends BaseController
                 ->findAll();
 
             // Send data to view
-            return view('test/users', ['listOfUsers' => $listOfUsers]);
+            return view('admin/users', ['listOfUsers' => $listOfUsers]);
         } catch (\Exception $e) {
             // Error handling
             $listOfUsers = "There is an issue with the database";
-            return view('test/users', ['listOfUsers' => $listOfUsers]);
+            return view('admin/users', ['listOfUsers' => $listOfUsers]);
         }
     }
 
@@ -44,7 +44,7 @@ class CRUDUsers extends BaseController
     // ============================================
     public function showCreateUserPage()
     {
-        return view('test/user_create');
+        return view('admin/user_create');
     }
 
     // ============================================
@@ -92,7 +92,7 @@ class CRUDUsers extends BaseController
             }
 
             $session->setFlashdata('success', 'User created successfully!');
-            return redirect()->to('/test/users');
+            return redirect()->to('/admin/users');
         } catch (\Throwable $e) {
             $session->setFlashdata('error', 'Server error: ' . $e->getMessage());
             return redirect()->back()->withInput();
@@ -109,13 +109,13 @@ class CRUDUsers extends BaseController
 
             if (!$user) {
                 session()->setFlashdata('error', 'User not found');
-                return redirect()->to('/test/users');
+                return redirect()->to('/admin/users');
             }
 
-            return view('test/user_update', ['user' => $user]);
+            return view('admin/user_update', ['user' => $user]);
         } catch (\Exception $e) {
             session()->setFlashdata('error', 'Error loading user: ' . $e->getMessage());
-            return redirect()->to('/test/users');
+            return redirect()->to('/admin/users');
         }
     }
 
@@ -216,187 +216,6 @@ class CRUDUsers extends BaseController
 
             return $this->response->setStatusCode(ResponseInterface::HTTP_OK)
                 ->setJSON(['success' => true, 'message' => 'User deleted successfully']);
-        } catch (\Throwable $e) {
-            return $this->response->setStatusCode(ResponseInterface::HTTP_INTERNAL_SERVER_ERROR)
-                ->setJSON(['success' => false, 'message' => 'Server error: ' . $e->getMessage()]);
-        }
-    }
-
-    // ============================================
-    // PRODUCTS CRUD METHODS
-    // ============================================
-
-    // READ - Show all products
-    public function showProductsPage()
-    {
-        try {
-            $listOfProducts = $this->productModel
-                ->where('is_available', 1)
-                ->orderBy('id', 'DESC')
-                ->findAll();
-
-            return view('test/products', ['listOfProducts' => $listOfProducts]);
-        } catch (\Exception $e) {
-            $listOfProducts = "There is an issue with the database";
-            return view('test/products', ['listOfProducts' => $listOfProducts]);
-        }
-    }
-
-    // CREATE - Show create form
-    public function showCreateProductPage()
-    {
-        return view('test/product_create');
-    }
-
-    // CREATE - Process product creation
-    public function createProduct()
-    {
-        $request = service('request');
-        $post = $request->getPost();
-        $session = session();
-
-        $validation = \Config\Services::validation();
-        $validation->setRules([
-            'name'     => 'required|min_length[3]|max_length[255]',
-            'price'    => 'required|decimal',
-            'category' => 'required|in_list[artwork,artbook,merchandise]',
-            'stock'    => 'required|integer',
-        ]);
-
-        if (!$validation->run($post)) {
-            $session->setFlashdata('errors', $validation->getErrors());
-            $session->setFlashdata('old', $post);
-            return redirect()->back()->withInput();
-        }
-
-        try {
-            $payload = [
-                'name'         => $post['name'],
-                'description'  => $post['description'] ?? null,
-                'price'        => $post['price'],
-                'category'     => $post['category'],
-                'artist'       => $post['artist'] ?? null,
-                'image_url'    => $post['image_url'] ?? null,
-                'stock'        => $post['stock'],
-                'is_available' => 1,
-            ];
-
-            $ok = $this->productModel->insert($payload);
-
-            if ($ok === false) {
-                throw new \Exception('Failed to create product');
-            }
-
-            $session->setFlashdata('success', 'Product created successfully!');
-            return redirect()->to('/test/products');
-        } catch (\Throwable $e) {
-            $session->setFlashdata('error', 'Server error: ' . $e->getMessage());
-            return redirect()->back()->withInput();
-        }
-    }
-
-    // UPDATE - Show update form
-    public function showUpdateProductPage($id)
-    {
-        try {
-            $product = $this->productModel->find($id);
-
-            if (!$product) {
-                session()->setFlashdata('error', 'Product not found');
-                return redirect()->to('/test/products');
-            }
-
-            return view('test/product_update', ['product' => $product]);
-        } catch (\Exception $e) {
-            session()->setFlashdata('error', 'Error loading product: ' . $e->getMessage());
-            return redirect()->to('/test/products');
-        }
-    }
-
-    // UPDATE - Process product update
-    public function updateProduct()
-    {
-        $request = service('request');
-        $post = $request->getPost();
-        $session = session();
-
-        $validation = \Config\Services::validation();
-        $validation->setRule('id', 'ID', 'required|min_length[1]');
-        $validation->setRule('name', 'Product Name', 'required|min_length[3]');
-        $validation->setRule('price', 'Price', 'required|decimal');
-        $validation->setRule('category', 'Category', 'required|in_list[artwork,artbook,merchandise]');
-        $validation->setRule('stock', 'Stock', 'required|integer');
-
-        if (!$validation->run($post)) {
-            $session->setFlashdata('errors', $validation->getErrors());
-            $session->setFlashdata('old', $post);
-            return redirect()->back()->withInput();
-        }
-
-        try {
-            $product = $this->productModel->find($post['id']);
-
-            if (!$product) {
-                return $this->response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND)
-                    ->setJSON(['success' => false, 'message' => 'Product not found']);
-            }
-
-            $payload = [
-                'id'           => $post['id'],
-                'name'         => $post['name'],
-                'description'  => $post['description'] ?? null,
-                'price'        => $post['price'],
-                'category'     => $post['category'],
-                'artist'       => $post['artist'] ?? null,
-                'image_url'    => $post['image_url'] ?? null,
-                'stock'        => $post['stock'],
-            ];
-
-            $ok = $this->productModel->save($payload);
-
-            if ($ok === false) {
-                throw new \Exception('Model update failed');
-            }
-
-            return $this->response->setStatusCode(ResponseInterface::HTTP_OK)
-                ->setJSON(['success' => true, 'message' => 'Product updated successfully']);
-        } catch (\Throwable $e) {
-            return $this->response->setStatusCode(ResponseInterface::HTTP_INTERNAL_SERVER_ERROR)
-                ->setJSON(['success' => false, 'message' => 'Server error: ' . $e->getMessage()]);
-        }
-    }
-
-    // DELETE - Soft delete product
-    public function deleteProduct()
-    {
-        $request = service('request');
-        $post = $request->getPost();
-        $session = session();
-
-        $validation = \Config\Services::validation();
-        $validation->setRule('id', 'ID', 'required|min_length[1]');
-
-        if (!$validation->run($post)) {
-            $session->setFlashdata('errors', $validation->getErrors());
-            return redirect()->back()->withInput();
-        }
-
-        try {
-            $product = $this->productModel->find($post['id']);
-
-            if (!$product) {
-                return $this->response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND)
-                    ->setJSON(['success' => false, 'message' => 'Product not found']);
-            }
-
-            $ok = $this->productModel->delete($post['id']);
-
-            if ($ok === false) {
-                throw new \Exception('Model deletion failed');
-            }
-
-            return $this->response->setStatusCode(ResponseInterface::HTTP_OK)
-                ->setJSON(['success' => true, 'message' => 'Product deleted successfully']);
         } catch (\Throwable $e) {
             return $this->response->setStatusCode(ResponseInterface::HTTP_INTERNAL_SERVER_ERROR)
                 ->setJSON(['success' => false, 'message' => 'Server error: ' . $e->getMessage()]);
