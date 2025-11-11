@@ -7,11 +7,9 @@
 
     <!-- Desktop Navigation -->
     <nav class="hidden md:flex space-x-8 text-[var(--neutral)] text-sm">
-        <a href="/users" class="hover:text-[var(--primary)] transition">Users</a>
-        <a href="/products" class="hover:text-[var(--primary)] transition">Products</a>
-        <a href="#" class="text-[var(--neutral)] hover:text-[var(--primary)] transition">Exhibits</a>
-        <a href="#" class="text-[var(--neutral)] hover:text-[var(--primary)] transition">Artists</a>
-        <a href="/orders" class="hover:text-[var(--primary)] transition">Orders</a>
+        <a href="/admin/users" class="hover:text-[var(--primary)] transition">Users</a>
+        <a href="/admin/products" class="hover:text-[var(--primary)] transition">Products</a>
+        <a href="/admin/orders" class="hover:text-[var(--primary)] transition">Orders</a>
     </nav>
 
     <!-- Desktop User Info & Logout -->
@@ -52,11 +50,9 @@
         </div>
 
         <!-- Menu Links -->
-        <a href="/users" class="text-[var(--neutral)] hover:text-[var(--primary)] transition">Users</a>
-        <a href="/products" class="text-[var(--neutral)] hover:text-[var(--primary)] transition">Products</a>
-        <a href="#" class="text-[var(--neutral)] hover:text-[var(--primary)] transition">Exhibits</a>
-        <a href="#" class="text-[var(--neutral)] hover:text-[var(--primary)] transition">Artists</a>
-        <a href="/orders" class="text-[var(--neutral)] hover:text-[var(--primary)] transition">Orders</a>
+        <a href="/admin/users" class="text-[var(--neutral)] hover:text-[var(--primary)] transition">Users</a>
+        <a href="/admin/products" class="text-[var(--neutral)] hover:text-[var(--primary)] transition">Products</a>
+        <a href="/admin/orders" class="text-[var(--neutral)] hover:text-[var(--primary)] transition">Orders</a>
 
         <!-- Logout Button -->
         <a href="/logout"
