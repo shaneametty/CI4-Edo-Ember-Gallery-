@@ -27,6 +27,12 @@ $routes->get('login', 'Auth::showLoginPage');
 // Process login
 $routes->post('login', 'Auth::login');
 
+// Show signup page
+$routes->get('signup', 'Auth::showSignupPage');
+
+// Process signup
+$routes->post('signup', 'Auth::signup');
+
 // Logout
 $routes->get('logout', 'Auth::logout');
 
