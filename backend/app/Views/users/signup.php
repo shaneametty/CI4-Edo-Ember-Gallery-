@@ -13,19 +13,61 @@
             <h2 class="mb-2 font-bold text-[var(--secondary)] text-3xl md:text-4xl">Create Account</h2>
             <p class="mb-6 text-[var(--neutral)]/80">Join Edo Ember Gallery today!</p>
 
-            <form class="flex flex-col gap-4">
-                <input type="text" name="first_name" placeholder="First Name"
-                    class="bg-[#1b1b1b] px-4 py-2 border border-[var(--secondary)] rounded-lg focus:outline-none text-[var(--neutral)]">
-                <input type="text" name="middle_name" placeholder="Middle Name"
-                    class="bg-[#1b1b1b] px-4 py-2 border border-[var(--secondary)] rounded-lg focus:outline-none text-[var(--neutral)]">
-                <input type="text" name="last_name" placeholder="Last Name"
-                    class="bg-[#1b1b1b] px-4 py-2 border border-[var(--secondary)] rounded-lg focus:outline-none text-[var(--neutral)]">
-                <input type="email" name="email" placeholder="Email"
-                    class="bg-[#1b1b1b] px-4 py-2 border border-[var(--secondary)] rounded-lg focus:outline-none text-[var(--neutral)]">
-                <input type="password" name="password" placeholder="Password"
+            <!-- Error Messages -->
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="bg-red-500/20 border border-red-500 text-red-500 px-4 py-3 rounded-lg mb-4">
+                    <?= session()->getFlashdata('error') ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Validation Errors -->
+            <?php if (session()->getFlashdata('errors')): ?>
+                <div class="bg-red-500/20 border border-red-500 rounded-lg p-4 mb-4">
+                    <ul class="list-disc list-inside text-red-500">
+                        <?php foreach (session()->getFlashdata('errors') as $error): ?>
+                            <li><?= esc($error) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
+            <form class="flex flex-col gap-4" action="/signup" method="post">
+                <input type="text"
+                    name="first_name"
+                    placeholder="First Name"
+                    value="<?= old('first_name') ?>"
+                    class="bg-[#1b1b1b] px-4 py-2 border border-[var(--secondary)] rounded-lg focus:outline-none text-[var(--neutral)]"
+                    required>
+
+                <input type="text"
+                    name="middle_name"
+                    placeholder="Middle Name (Optional)"
+                    value="<?= old('middle_name') ?>"
                     class="bg-[#1b1b1b] px-4 py-2 border border-[var(--secondary)] rounded-lg focus:outline-none text-[var(--neutral)]">
 
-                <button type="submit" class="hover:bg-[var(--primary)] hover:shadow-[0_0_15px_var(--primary)] py-2 border-[var(--primary)] border-2 rounded-lg font-bold text-[var(--primary)] hover:text-[var(--neutral)] transition">
+                <input type="text"
+                    name="last_name"
+                    placeholder="Last Name"
+                    value="<?= old('last_name') ?>"
+                    class="bg-[#1b1b1b] px-4 py-2 border border-[var(--secondary)] rounded-lg focus:outline-none text-[var(--neutral)]"
+                    required>
+
+                <input type="email"
+                    name="email"
+                    placeholder="Email"
+                    value="<?= old('email') ?>"
+                    class="bg-[#1b1b1b] px-4 py-2 border border-[var(--secondary)] rounded-lg focus:outline-none text-[var(--neutral)]"
+                    required>
+
+                <input type="password"
+                    name="password"
+                    placeholder="Password (min 6 characters)"
+                    class="bg-[#1b1b1b] px-4 py-2 border border-[var(--secondary)] rounded-lg focus:outline-none text-[var(--neutral)]"
+                    required
+                    minlength="6">
+
+                <button type="submit"
+                    class="hover:bg-[var(--primary)] hover:shadow-[0_0_15px_var(--primary)] py-2 border-[var(--primary)] border-2 rounded-lg font-bold text-[var(--primary)] hover:text-[var(--neutral)] transition">
                     Sign Up
                 </button>
 
