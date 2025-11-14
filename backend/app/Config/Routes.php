@@ -60,6 +60,7 @@ $routes->post('admin/users/update', 'CRUDUsers::updateUser', ['filter' => 'auth:
 $routes->post('admin/users/delete', 'CRUDUsers::deleteUser', ['filter' => 'auth:admin']);
 
 // ============================================
+<<<<<<< HEAD
 // Orders Management Routes (CRUD)
 // Protected - Admin Only
 // ============================================
@@ -78,3 +79,26 @@ $routes->group('', ['filter' => 'auth:admin'], static function ($routes) {
     // DELETE - Soft delete order
     $routes->post('orders_delete', 'CRUDOrders::deleteOrder');
 });
+=======
+// Product Management Routes (CRUD Testing)
+// Protected - Admin Only
+// ============================================
+
+// READ - Display all products
+$routes->get('admin/products', 'CRUDUsers::showProductsPage', ['filter' => 'auth:admin']);
+
+// CREATE - Show create form
+$routes->get('admin/products/create', 'CRUDUsers::showCreateProductPage', ['filter' => 'auth:admin']);
+
+// CREATE - Process product creation
+$routes->post('admin/products/create', 'CRUDUsers::createProduct', ['filter' => 'auth:admin']);
+
+// UPDATE - Show update form
+$routes->get('admin/products/update/(:num)', 'CRUDUsers::showUpdateProductPage/$1', ['filter' => 'auth:admin']);
+
+// UPDATE - Process product update
+$routes->post('admin/products/update', 'CRUDUsers::updateProduct', ['filter' => 'auth:admin']);
+
+// DELETE - Soft delete product
+$routes->post('admin/products/delete', 'CRUDUsers::deleteProduct', ['filter' => 'auth:admin']);
+>>>>>>> 69ba010db4e742ec523c2183b370211350a0de8d
