@@ -60,7 +60,6 @@ $routes->post('admin/users/update', 'CRUDUsers::updateUser', ['filter' => 'auth:
 $routes->post('admin/users/delete', 'CRUDUsers::deleteUser', ['filter' => 'auth:admin']);
 
 // ============================================
-<<<<<<< HEAD
 // Orders Management Routes (CRUD)
 // Protected - Admin Only
 // ============================================
@@ -79,7 +78,7 @@ $routes->group('', ['filter' => 'auth:admin'], static function ($routes) {
     // DELETE - Soft delete order
     $routes->post('orders_delete', 'CRUDOrders::deleteOrder');
 });
-=======
+// ============================================
 // Product Management Routes (CRUD Testing)
 // Protected - Admin Only
 // ============================================
@@ -101,4 +100,3 @@ $routes->post('admin/products/update', 'CRUDUsers::updateProduct', ['filter' => 
 
 // DELETE - Soft delete product
 $routes->post('admin/products/delete', 'CRUDUsers::deleteProduct', ['filter' => 'auth:admin']);
->>>>>>> 69ba010db4e742ec523c2183b370211350a0de8d
