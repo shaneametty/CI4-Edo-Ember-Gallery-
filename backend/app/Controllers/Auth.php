@@ -20,9 +20,13 @@ class Auth extends BaseController
     // ============================================
     public function showLoginPage()
     {
+        $session = session();
+
         // If already logged in, redirect based on user type
-        if (session()->get('isLoggedIn')) {
-            if (session()->get('userType') === 'admin') {
+        if ($session->get('isLoggedIn')) {
+            $userType = $session->get('userType') ?? ($session->get('user')['type'] ?? null);
+
+            if (strtolower($userType) === 'admin') {
                 return redirect()->to('/admin/users');
             } else {
                 return redirect()->to('/'); // Redirect regular users to home
@@ -58,42 +62,42 @@ class Auth extends BaseController
             // Find user by email
             $user = $this->userModel->where('email', $post['email'])->first();
 
-            // Check if user exists
             if (!$user) {
                 $session->setFlashdata('error', 'Invalid email or password');
                 return redirect()->back()->withInput();
             }
 
-            // Check if user is active
             if ($user->is_active != 1) {
                 $session->setFlashdata('error', 'Your account has been deactivated. Please contact support.');
                 return redirect()->back()->withInput();
             }
 
-            // Verify password
             if (!password_verify($post['password'], $user->password)) {
                 $session->setFlashdata('error', 'Invalid email or password');
                 return redirect()->back()->withInput();
             }
 
-            // Set session data
+            // Set session data with userType
             $sessionData = [
-                'userId'      => $user->id,
-                'userEmail'   => $user->email,
-                'userName'    => $user->first_name . ' ' . $user->last_name,
-                'userType'    => $user->type,
-                'isLoggedIn'  => true,
+                'user'       => [
+                    'id'    => $user->id,
+                    'email' => $user->email,
+                    'name'  => $user->first_name . ' ' . $user->last_name,
+                    'type'  => $user->type,
+                    'photo' => $user->photo ?? null,
+                ],
+                'userType'   => strtolower($user->type), // added userType for easy check
+                'isLoggedIn' => true
             ];
 
             $session->set($sessionData);
 
             // Redirect based on user type
-            if ($user->type === 'admin') {
+            if (strtolower($user->type) === 'admin') {
                 return redirect()->to('/admin/users');
             } else {
-                return redirect()->to('/login'); // Regular users go to login
+                return redirect()->to('/'); // regular users
             }
-
         } catch (\Throwable $e) {
             $session->setFlashdata('error', 'Server error: ' . $e->getMessage());
             return redirect()->back()->withInput();
@@ -115,12 +119,16 @@ class Auth extends BaseController
     // ============================================
     public function showSignupPage()
     {
+        $session = session();
+
         // If already logged in, redirect based on user type
-        if (session()->get('isLoggedIn')) {
-            if (session()->get('userType') === 'admin') {
+        if ($session->get('isLoggedIn')) {
+            $userType = $session->get('userType') ?? ($session->get('user')['type'] ?? null);
+
+            if (strtolower($userType) === 'admin') {
                 return redirect()->to('/admin/users');
             } else {
-                return redirect()->to('/login');
+                return redirect()->to('/'); // redirect regular users to home
             }
         }
 
@@ -136,7 +144,6 @@ class Auth extends BaseController
         $post = $request->getPost();
         $session = session();
 
-        // Validation rules
         $validation = \Config\Services::validation();
         $validation->setRules([
             'first_name' => 'required|min_length[2]|max_length[100]',
@@ -152,41 +159,38 @@ class Auth extends BaseController
         }
 
         try {
-            // Create new user
             $userData = [
                 'first_name'  => $post['first_name'],
                 'middle_name' => $post['middle_name'] ?? null,
                 'last_name'   => $post['last_name'],
                 'email'       => $post['email'],
-                'password'    => $post['password'], // Will be hashed by model
-                'type'        => 'user', // Default to regular user
+                'password'    => $post['password'], // will be hashed by model
+                'type'        => 'user', // default regular user
                 'is_active'   => 1,
             ];
 
             $userId = $this->userModel->insert($userData);
+            if (!$userId) throw new \Exception('Failed to create account');
 
-            if (!$userId) {
-                throw new \Exception('Failed to create account');
-            }
-
-            // Auto-login after signup
             $user = $this->userModel->find($userId);
 
-            // Set session data
+            // Set session data for new user
             $sessionData = [
-                'userId'      => $user->id,
-                'userEmail'   => $user->email,
-                'userName'    => $user->first_name . ' ' . $user->last_name,
-                'userType'    => $user->type,
-                'isLoggedIn'  => true,
+                'user'       => [
+                    'id'    => $user->id,
+                    'email' => $user->email,
+                    'name'  => $user->first_name . ' ' . $user->last_name,
+                    'type'  => $user->type,
+                    'photo' => $user->photo ?? null,
+                ],
+                'userType'   => strtolower($user->type),
+                'isLoggedIn' => true
             ];
 
             $session->set($sessionData);
 
-            // Redirect to login (regular users)
             $session->setFlashdata('success', 'Account created successfully! Welcome to Edo Ember Gallery.');
-            return redirect()->to('/login');
-
+            return redirect()->to('/'); // redirect new user to home
         } catch (\Throwable $e) {
             $session->setFlashdata('error', 'Server error: ' . $e->getMessage());
             return redirect()->back()->withInput();
