@@ -20,7 +20,7 @@ class OrdersModel extends Model
     protected $table            = 'orders';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'object'; // Returns objects for easier property access
+    protected $returnType       = 'App\Entities\Order'; // ✅ FIXED: Returns Order entity instead of stdClass
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     
@@ -95,11 +95,11 @@ class OrdersModel extends Model
      * This is useful for displaying order details page.
      * 
      * @param int $orderId The order ID
-     * @return object|null Order object with items property, or null if not found
+     * @return \App\Entities\Order|null Order entity with items property, or null if not found
      */
     public function getOrderWithItems($orderId)
     {
-        // Get the order
+        // Get the order (now returns Order entity)
         $order = $this->find($orderId);
         
         if (!$order) {
