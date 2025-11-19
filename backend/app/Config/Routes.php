@@ -41,22 +41,22 @@ $routes->get('logout', 'Auth::logout');
 // Protected - Admin Only
 // ============================================
 
-$routes->group('admin/users', ['filter' => 'auth:admin'], function($routes) {
+$routes->group('admin/users', ['filter' => 'auth:admin'], function ($routes) {
     // READ - Display all users
     $routes->get('/', 'AdminUsers::showUsersPage');
-    
+
     // CREATE - Show create form
     $routes->get('create', 'AdminUsers::showCreateUserPage');
-    
+
     // CREATE - Process user creation
     $routes->post('create', 'AdminUsers::createUser');
-    
+
     // UPDATE - Show update form
     $routes->get('update/(:num)', 'AdminUsers::showUpdateUserPage/$1');
-    
+
     // UPDATE - Process user update
     $routes->post('update', 'AdminUsers::updateUser');
-    
+
     // DELETE - Soft delete user
     $routes->post('delete', 'AdminUsers::deleteUser');
 });
@@ -66,22 +66,22 @@ $routes->group('admin/users', ['filter' => 'auth:admin'], function($routes) {
 // Protected - Admin Only
 // ============================================
 
-$routes->group('admin/products', ['filter' => 'auth:admin'], function($routes) {
+$routes->group('admin/products', ['filter' => 'auth:admin'], function ($routes) {
     // READ - Display all products
     $routes->get('/', 'AdminProducts::showProductsPage');
-    
+
     // CREATE - Show create form
     $routes->get('create', 'AdminProducts::showCreateProductPage');
-    
+
     // CREATE - Process product creation
     $routes->post('create', 'AdminProducts::createProduct');
-    
+
     // UPDATE - Show update form
     $routes->get('update/(:num)', 'AdminProducts::showUpdateProductPage/$1');
-    
+
     // UPDATE - Process product update
     $routes->post('update', 'AdminProducts::updateProduct');
-    
+
     // DELETE - Soft delete product
     $routes->post('delete', 'AdminProducts::deleteProduct');
 });
@@ -90,16 +90,19 @@ $routes->group('admin/products', ['filter' => 'auth:admin'], function($routes) {
 // ADMIN - ORDERS MANAGEMENT
 // Protected - Admin Only
 // ============================================
+$routes->group('admin/orders', ['filter' => 'auth:admin'], function ($routes) {
 
-// List & Create
-$routes->get('admin/orders', 'AdminOrders::index', ['filter' => 'auth:admin']);
-$routes->get('admin/orders/create', 'AdminOrders::create', ['filter' => 'auth:admin']);
-$routes->post('admin/orders/create', 'AdminOrders::store', ['filter' => 'auth:admin']);
+    // List & Create
+    $routes->get('/', 'AdminOrders::index');
+    $routes->get('create', 'AdminOrders::create');
+    $routes->post('create', 'AdminOrders::store');
 
-// View & Update
-$routes->get('admin/orders/show/(:num)', 'AdminOrders::show/$1', ['filter' => 'auth:admin']);
-$routes->post('admin/orders/update-status', 'AdminOrders::updateStatus', ['filter' => 'auth:admin']);
-$routes->post('admin/orders/update-payment', 'AdminOrders::updatePayment', ['filter' => 'auth:admin']);
+    // View & Update
+    $routes->get('show/(:num)', 'AdminOrders::show/$1');
+    $routes->get('update/(:num)', 'AdminOrders::edit/$1'); // if you have edit()
+    $routes->post('update-status', 'AdminOrders::updateStatus');
+    $routes->post('update-payment', 'AdminOrders::updatePayment');
 
-// Delete
-$routes->post('admin/orders/delete', 'AdminOrders::delete', ['filter' => 'auth:admin']);
+    // Delete
+    $routes->post('delete', 'AdminOrders::delete');
+});
