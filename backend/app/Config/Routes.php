@@ -18,6 +18,13 @@ $routes->get('/moodBoard', 'Users::moodBoard');
 $routes->get('/dashboard', 'Admin::dashboard');
 
 // ============================================
+// ADMIN - DASHBOARD
+// Protected - Admin Only
+// ============================================
+$routes->get('admin/dashboard', 'Admin::dashboard', ['filter' => 'auth:admin']);
+$routes->get('admin', 'Admin::dashboard', ['filter' => 'auth:admin']); // Alias: /admin redirects to dashboard
+
+// ============================================
 // Authentication Routes
 // ============================================
 

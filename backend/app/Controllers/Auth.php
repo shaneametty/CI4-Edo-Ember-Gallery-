@@ -27,7 +27,7 @@ class Auth extends BaseController
             $userType = $session->get('userType') ?? ($session->get('user')['type'] ?? null);
 
             if (strtolower($userType) === 'admin') {
-                return redirect()->to('/admin/users');
+                return redirect()->to('/admin/dashboard');
             } else {
                 return redirect()->to('/'); // Redirect regular users to home
             }
@@ -94,7 +94,7 @@ class Auth extends BaseController
 
             // Redirect based on user type
             if (strtolower($user->type) === 'admin') {
-                return redirect()->to('/admin/users');
+                return redirect()->to('/admin/dashboard'); // Changed from /admin/users to /admin/dashboard
             } else {
                 return redirect()->to('/'); // regular users
             }
@@ -126,7 +126,7 @@ class Auth extends BaseController
             $userType = $session->get('userType') ?? ($session->get('user')['type'] ?? null);
 
             if (strtolower($userType) === 'admin') {
-                return redirect()->to('/admin/users');
+                return redirect()->to('/admin/dashboard'); // Changed from /admin/users to /admin/dashboard
             } else {
                 return redirect()->to('/'); // redirect regular users to home
             }
