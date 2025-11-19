@@ -41,62 +41,65 @@ $routes->get('logout', 'Auth::logout');
 // Protected - Admin Only
 // ============================================
 
-// READ - Display all users
-$routes->get('admin/users', 'CRUDUsers::showUsersPage', ['filter' => 'auth:admin']);
-
-// CREATE - Show create form
-$routes->get('admin/users/create', 'CRUDUsers::showCreateUserPage', ['filter' => 'auth:admin']);
-
-// CREATE - Process user creation
-$routes->post('admin/users/create', 'CRUDUsers::createUser', ['filter' => 'auth:admin']);
-
-// UPDATE - Show update form
-$routes->get('admin/users/update/(:num)', 'CRUDUsers::showUpdateUserPage/$1', ['filter' => 'auth:admin']);
-
-// UPDATE - Process user update
-$routes->post('admin/users/update', 'CRUDUsers::updateUser', ['filter' => 'auth:admin']);
-
-// DELETE - Soft delete user
-$routes->post('admin/users/delete', 'CRUDUsers::deleteUser', ['filter' => 'auth:admin']);
-
-// ============================================
-// Orders Management Routes (CRUD)
-// Protected - Admin Only
-// ============================================
-
-$routes->group('', ['filter' => 'auth:admin'], static function ($routes) {
-    // READ - Display all orders
-    $routes->get('admin/orders', 'CRUDOrders::showOrdersPage');
+$routes->group('admin/users', ['filter' => 'auth:admin'], function($routes) {
+    // READ - Display all users
+    $routes->get('/', 'AdminUsers::showUsersPage');
+    
     // CREATE - Show create form
-    $routes->get('orders_create', 'CRUDOrders::showCreateOrderPage');
-    // CREATE - Process order creation
-    $routes->post('orders_create', 'CRUDOrders::createOrder');
+    $routes->get('create', 'AdminUsers::showCreateUserPage');
+    
+    // CREATE - Process user creation
+    $routes->post('create', 'AdminUsers::createUser');
+    
     // UPDATE - Show update form
-    $routes->get('orders_update/(:num)', 'CRUDOrders::showUpdateOrderPage/$1');
-    // UPDATE - Process order update
-    $routes->post('orders_update', 'CRUDOrders::updateOrder');
-    // DELETE - Soft delete order
-    $routes->post('orders_delete', 'CRUDOrders::deleteOrder');
+    $routes->get('update/(:num)', 'AdminUsers::showUpdateUserPage/$1');
+    
+    // UPDATE - Process user update
+    $routes->post('update', 'AdminUsers::updateUser');
+    
+    // DELETE - Soft delete user
+    $routes->post('delete', 'AdminUsers::deleteUser');
 });
+
 // ============================================
 // Product Management Routes (CRUD Testing)
 // Protected - Admin Only
 // ============================================
 
-// READ - Display all products
-$routes->get('admin/products', 'CRUDUsers::showProductsPage', ['filter' => 'auth:admin']);
+$routes->group('admin/products', ['filter' => 'auth:admin'], function($routes) {
+    // READ - Display all products
+    $routes->get('/', 'AdminProducts::showProductsPage');
+    
+    // CREATE - Show create form
+    $routes->get('create', 'AdminProducts::showCreateProductPage');
+    
+    // CREATE - Process product creation
+    $routes->post('create', 'AdminProducts::createProduct');
+    
+    // UPDATE - Show update form
+    $routes->get('update/(:num)', 'AdminProducts::showUpdateProductPage/$1');
+    
+    // UPDATE - Process product update
+    $routes->post('update', 'AdminProducts::updateProduct');
+    
+    // DELETE - Soft delete product
+    $routes->post('delete', 'AdminProducts::deleteProduct');
+});
 
-// CREATE - Show create form
-$routes->get('admin/products/create', 'CRUDUsers::showCreateProductPage', ['filter' => 'auth:admin']);
+// ============================================
+// ADMIN - ORDERS MANAGEMENT
+// Protected - Admin Only
+// ============================================
 
-// CREATE - Process product creation
-$routes->post('admin/products/create', 'CRUDUsers::createProduct', ['filter' => 'auth:admin']);
+// List & Create
+$routes->get('admin/orders', 'AdminOrders::index', ['filter' => 'auth:admin']);
+$routes->get('admin/orders/create', 'AdminOrders::create', ['filter' => 'auth:admin']);
+$routes->post('admin/orders/create', 'AdminOrders::store', ['filter' => 'auth:admin']);
 
-// UPDATE - Show update form
-$routes->get('admin/products/update/(:num)', 'CRUDUsers::showUpdateProductPage/$1', ['filter' => 'auth:admin']);
+// View & Update
+$routes->get('admin/orders/show/(:num)', 'AdminOrders::show/$1', ['filter' => 'auth:admin']);
+$routes->post('admin/orders/update-status', 'AdminOrders::updateStatus', ['filter' => 'auth:admin']);
+$routes->post('admin/orders/update-payment', 'AdminOrders::updatePayment', ['filter' => 'auth:admin']);
 
-// UPDATE - Process product update
-$routes->post('admin/products/update', 'CRUDUsers::updateProduct', ['filter' => 'auth:admin']);
-
-// DELETE - Soft delete product
-$routes->post('admin/products/delete', 'CRUDUsers::deleteProduct', ['filter' => 'auth:admin']);
+// Delete
+$routes->post('admin/orders/delete', 'AdminOrders::delete', ['filter' => 'auth:admin']);
