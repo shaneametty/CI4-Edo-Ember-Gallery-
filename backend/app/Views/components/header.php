@@ -7,14 +7,12 @@
     </a>
 
     <!-- Navigation -->
-    <nav class="flex space-x-8 text-[var(--neutral)] text-sm md:text-base">
+    <nav class="flex items-center justify-center gap-16 max-w-lg mx-auto text-[var(--neutral)] text-sm md:text-base">
         <a href="/" class="hover:text-[var(--primary)] transition">Home</a>
-        <a href="#" class="hover:text-[var(--primary)] transition">Exhibits</a>
-        <a href="#" class="hover:text-[var(--primary)] transition">Artists</a>
-        <a href="#" class="hover:text-[var(--primary)] transition">Shop</a>
-        <a href="#" class="hover:text-[var(--primary)] transition">Blog</a>
-        <a href="#" class="hover:text-[var(--primary)] transition">Contact</a>
+        <a href="/userProducts" class="hover:text-[var(--primary)] transition">Products</a>
+        <a href="#about" class="hover:text-[var(--primary)] transition">About</a>
     </nav>
+
 
     <!-- Login / Profile -->
     <?php if ($session->has('user')):

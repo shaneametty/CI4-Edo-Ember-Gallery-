@@ -3,40 +3,6 @@
 <?= view('components/head', ['title' => '🔥 Edo Ember Gallery']) ?>
 
 <body class="bg-[var(--accent)] text-[var(--neutral)] font-sans">
-    <style>
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fadeInUp {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        .reveal-on-scroll.appear {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .parallax {
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
     <?= view('components/header'); ?>
     <section class="relative bg-cover bg-center bg-no-repeat px-10 py-24 md:py-32 animate-fadeInUp"
         style="background-image: url('https://i.pinimg.com/1200x/98/43/3b/98433b87e6ce7de76f830f77821cc348.jpg');">
@@ -55,7 +21,7 @@
         </div>
     </section>
 
-    <section class="reveal-on-scroll bg-[#1b1b1b] py-24 px-6 md:px-10 border-t border-[var(--secondary)]/20">
+    <section id="about" class="reveal-on-scroll bg-[#1b1b1b] py-24 px-6 md:px-10 border-t border-[var(--secondary)]/20">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
                 <h3 class="text-3xl font-bold text-[var(--neutral)] mb-6">
