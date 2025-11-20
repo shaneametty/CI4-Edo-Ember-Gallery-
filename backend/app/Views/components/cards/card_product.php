@@ -10,7 +10,7 @@
             <h3 class="text-xl font-bold text-[var(--secondary)] mb-2"><?= esc($title) ?></h3>
             <p class="text-[var(--neutral)]/80 mb-4"><?= esc($desc) ?></p>
             <?php if (!empty($price)): ?>
-                <p class="text-[var(--primary)] font-semibold mb-6">Starting at <?= esc($price) ?></p>
+                <p class="text-[var(--primary)] font-semibold mb-6">$<?= esc($price) ?></p>
             <?php endif; ?>
         </div>
 

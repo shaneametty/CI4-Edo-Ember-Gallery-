@@ -80,10 +80,10 @@
             'href' => '#'
         ]); ?>
 
-        <?= view('components/cards/card_commission', [
+        <?= view('components/cards/card_product', [
             'title' => 'Custom Art Commissions',
             'desc' => 'Collaborate with our featured artists to bring your vision to life.',
-            'price' => '$500',
+            'price' => '500',
             'image' => 'https://i.pinimg.com/1200x/71/f7/61/71f76116e75aaed8af88fac228882002.jpg',
             'href' => '#'
         ]); ?>
