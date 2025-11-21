@@ -115,7 +115,16 @@ $routes->group('admin/orders', ['filter' => 'auth:admin'], function ($routes) {
 });
 
 // ============================================
-// USER
+// USER AREA - Protected Routes (Regular Users Only)
 // ============================================
 
-$routes->get('/userProducts', 'User::userProducts');
+$routes->group('user', ['filter' => 'auth:user'], function($routes) {
+    // User Profile (Main landing page for users)
+    $routes->get('profile', 'User::profile');
+    $routes->post('profile/update', 'User::updateProfile');
+    $routes->post('profile/deactivate', 'User::deactivateAccount');
+    
+    // User Orders (View their own orders - placeholder for future)
+    $routes->get('orders', 'User::orders');
+    $routes->get('orders/view/(:num)', 'User::viewOrder/$1');
+});
