@@ -113,3 +113,9 @@ $routes->group('admin/orders', ['filter' => 'auth:admin'], function ($routes) {
     // Delete
     $routes->post('delete', 'AdminOrders::delete');
 });
+
+// ============================================
+// USER
+// ============================================
+
+$routes->get('/userProducts', 'User::userProducts');
