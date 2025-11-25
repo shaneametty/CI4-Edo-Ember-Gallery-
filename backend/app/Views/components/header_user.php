@@ -8,8 +8,8 @@
     <!-- Desktop Navigation -->
     <nav class="hidden md:flex space-x-8 text-[var(--neutral)] text-sm">
         <a href="/user/profile" class="hover:text-[var(--primary)] transition">My Profile</a>
+        <a href="/user/products" class="hover:text-[var(--primary)] transition">Products</a>
         <a href="/user/orders" class="hover:text-[var(--primary)] transition">My Orders</a>
-        <a href="/" class="hover:text-[var(--primary)] transition">Browse Gallery</a>
     </nav>
 
     <!-- Desktop User Info & Logout -->
